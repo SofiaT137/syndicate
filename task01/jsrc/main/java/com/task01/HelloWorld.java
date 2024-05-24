@@ -25,7 +25,6 @@ public class HelloWorld implements RequestHandler<Object, String> {
 
 	public String handleRequest(Object request, Context context) {
 		System.out.println("Hello from lambda");
-		Map<String, Object> resultMap = new LinkedHashMap<>();
 		return "{\"statusCode\": 200, \"message\": \"Hello from Lambda\"}";
 	}
 }
