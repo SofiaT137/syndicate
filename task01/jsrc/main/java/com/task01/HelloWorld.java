@@ -8,23 +8,25 @@ import com.syndicate.deployment.model.RetentionSetting;
 import com.syndicate.deployment.model.lambda.url.AuthType;
 import com.syndicate.deployment.model.lambda.url.InvokeMode;
 
-import java.util.LinkedHashMap;
+import java.util.HashMap;
 import java.util.Map;
 
 @LambdaUrlConfig(
 		authType = AuthType.NONE,
 		invokeMode = InvokeMode.BUFFERED
 )
-@LambdaHandler(
-	lambdaName = "hello_world",
+@LambdaHandler(lambdaName = "hello_world",
 	roleName = "hello_world-role",
 	isPublishVersion = true,
 	logsExpiration = RetentionSetting.SYNDICATE_ALIASES_SPECIFIED
 )
-public class HelloWorld implements RequestHandler<Object, String> {
+public class HelloWorld implements RequestHandler<Object, Map<String, Object>> {
 
-	public String handleRequest(Object request, Context context) {
+	public Map<String, Object> handleRequest(Object request, Context context) {
 		System.out.println("Hello from lambda");
-		return "{\"statusCode\": 200, \"message\": \"Hello from Lambda\"}";
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		resultMap.put("statusCode", 200);
+		resultMap.put("message", "Hello from Lambda");
+		return resultMap;
 	}
 }
