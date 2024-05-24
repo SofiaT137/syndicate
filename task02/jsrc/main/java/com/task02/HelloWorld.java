@@ -7,8 +7,8 @@ import com.syndicate.deployment.annotations.lambda.LambdaUrlConfig;
 import com.syndicate.deployment.model.RetentionSetting;
 import com.syndicate.deployment.model.lambda.url.AuthType;
 import com.syndicate.deployment.model.lambda.url.InvokeMode;
-import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyRequestEvent;
-import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyResponseEvent;
+
+import java.util.Map;
 
 @LambdaUrlConfig(
 		authType = AuthType.NONE,
@@ -20,20 +20,17 @@ import com.amazonaws.services.lambda.runtime.events.APIGatewayProxyResponseEvent
 	logsExpiration = RetentionSetting.SYNDICATE_ALIASES_SPECIFIED
 )
 
-public class HelloWorld implements RequestHandler<APIGatewayProxyRequestEvent, APIGatewayProxyResponseEvent> {
+public class HelloWorld implements RequestHandler<Map<String, Object>, String> {
 
-	public APIGatewayProxyResponseEvent handleRequest(APIGatewayProxyRequestEvent request, Context context) {
-		String path = request.getPath();
-		String method = request.getHttpMethod();
-
+	@Override
+	public String handleRequest(Map<String, Object> input, Context context) {
+		String path = (String) input.get("rawPath");
+		Map<String, Object> requestContext = (Map<String, Object>) input.get("requestContext");
+		String method = (String) ((Map<String, Object>) requestContext.get("http")).get("method");
 		if ("/hello".equals(path)) {
-			return new APIGatewayProxyResponseEvent()
-					.withStatusCode(200)
-					.withBody("{\"message\": \"Hello from Lambda\"}");
+			return "{\"statusCode\": 200, \"message\": \"Hello from Lambda\"}";
 		} else {
-			return new APIGatewayProxyResponseEvent()
-					.withStatusCode(400)
-					.withBody("{\"message\": \"Bad request syntax or unsupported method. Request path: " + path + ". HTTP method: " + method + "\"}");
+			return "{\"statusCode\": 400, \"message\": \"Bad request syntax or unsupported method. Request path: " + path + ". HTTP method: " + method + "\"}";
 		}
 	}
 }
