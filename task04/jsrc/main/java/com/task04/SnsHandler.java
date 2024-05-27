@@ -12,7 +12,7 @@ import com.syndicate.deployment.model.RetentionSetting;
 
 @LambdaHandler(lambdaName = "sns_handler",
 		roleName = "sns_handler-role",
-		isPublishVersion = true,
+		isPublishVersion = false,
 		logsExpiration = RetentionSetting.SYNDICATE_ALIASES_SPECIFIED
 )
 @SnsEventSource(

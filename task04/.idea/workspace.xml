@@ -8,6 +8,7 @@
       <change beforePath="$PROJECT_DIR$/../task01/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../task01/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../task01/jsrc/main/java/com/task01/HelloWorld.java" beforeDir="false" afterPath="$PROJECT_DIR$/../task01/jsrc/main/java/com/task01/HelloWorld.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../task03/deployment_resources.json" beforeDir="false" afterPath="$PROJECT_DIR$/../task03/deployment_resources.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../task05/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../task05/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../task05/target/classes/com/task05/ApiHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/../task05/target/classes/com/task05/ApiHandler.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../task05/target/original-task05-1.0.0.jar" beforeDir="false" afterPath="$PROJECT_DIR$/../task05/target/original-task05-1.0.0.jar" afterDir="false" />
@@ -52,7 +53,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1716660535192</updated>
-      <workItem from="1716660536225" duration="11334000" />
+      <workItem from="1716660536225" duration="12909000" />
     </task>
     <servers />
   </component>
