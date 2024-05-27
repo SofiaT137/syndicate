@@ -22,14 +22,8 @@
       <change beforePath="$PROJECT_DIR$/../task04/target/deployment_resources.json" beforeDir="false" afterPath="$PROJECT_DIR$/../task04/target/deployment_resources.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../task04/target/original-task04-1.0.0.jar" beforeDir="false" afterPath="$PROJECT_DIR$/../task04/target/original-task04-1.0.0.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../task04/target/task04-1.0.0.jar" beforeDir="false" afterPath="$PROJECT_DIR$/../task04/target/task04-1.0.0.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/deployment_resources.json" beforeDir="false" afterPath="$PROJECT_DIR$/deployment_resources.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jsrc/main/java/com/task05/ApiHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/jsrc/main/java/com/task05/ApiHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/original-task05-1.0.0.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/original-task05-1.0.0.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/task05-1.0.0.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/task05-1.0.0.jar" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -77,7 +71,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1716670732885</updated>
-      <workItem from="1716670733914" duration="5998000" />
+      <workItem from="1716670733914" duration="6372000" />
     </task>
     <servers />
   </component>
