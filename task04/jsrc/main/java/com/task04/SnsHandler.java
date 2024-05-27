@@ -19,7 +19,7 @@ import com.syndicate.deployment.model.RetentionSetting;
 		targetTopic = "lambda_topic",
 		regionScope  = RegionScope.DEFAULT)
 @DependsOn(
-		name = "async_queue",
+		name = "lambda_topic",
 		resourceType = ResourceType.SNS_TOPIC
 )
 public class SnsHandler implements RequestHandler<Object, String> {
