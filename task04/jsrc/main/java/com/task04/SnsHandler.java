@@ -9,13 +9,11 @@ import com.syndicate.deployment.model.RegionScope;
 import com.syndicate.deployment.model.ResourceType;
 import com.syndicate.deployment.model.RetentionSetting;
 
-import java.util.HashMap;
-import java.util.Map;
 
 @LambdaHandler(lambdaName = "sns_handler",
-	roleName = "sns_handler-role",
-	isPublishVersion = true,
-	logsExpiration = RetentionSetting.SYNDICATE_ALIASES_SPECIFIED
+		roleName = "sns_handler-role",
+		isPublishVersion = true,
+		logsExpiration = RetentionSetting.SYNDICATE_ALIASES_SPECIFIED
 )
 @SnsEventSource(
 		targetTopic = "lambda_topic",

@@ -10,9 +10,9 @@ import com.syndicate.deployment.model.RetentionSetting;
 
 
 @LambdaHandler(lambdaName = "sqs_handler",
-	roleName = "sqs_handler-role",
-	isPublishVersion = true,
-	logsExpiration = RetentionSetting.SYNDICATE_ALIASES_SPECIFIED
+		roleName = "sqs_handler-role",
+		isPublishVersion = true,
+		logsExpiration = RetentionSetting.SYNDICATE_ALIASES_SPECIFIED
 )
 @SqsTriggerEventSource(
 		targetQueue = "async_queue",
