@@ -1,6 +1,5 @@
 package com.task05;
 
-import com.amazonaws.regions.Regions;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder;
 import com.amazonaws.services.dynamodbv2.document.DynamoDB;
@@ -18,16 +17,16 @@ import java.util.Map;
 import java.util.UUID;
 
 @LambdaHandler(lambdaName = "api_handler",
-	roleName = "api_handler-role",
-	isPublishVersion = true,
-	logsExpiration = RetentionSetting.SYNDICATE_ALIASES_SPECIFIED
+		roleName = "api_handler-role",
+		isPublishVersion = true,
+		logsExpiration = RetentionSetting.SYNDICATE_ALIASES_SPECIFIED
 )
 public class ApiHandler implements RequestHandler<Request, Map<String, Object>> {
 
 	private static final AmazonDynamoDB client = AmazonDynamoDBClientBuilder.defaultClient();
 	private final DynamoDB dynamoDB = new DynamoDB(client);
 
-    public Map<String, Object> handleRequest(Request request, Context context) {
+	public Map<String, Object> handleRequest(Request request, Context context) {
 		try {
 			UUID uuid = UUID.randomUUID();
 			Item item = new Item();
@@ -39,7 +38,7 @@ public class ApiHandler implements RequestHandler<Request, Map<String, Object>> 
 			context.getLogger().log("Content: " + content);
 			item.withString("createdAt", ZonedDateTime.now( ZoneOffset.UTC ).format( DateTimeFormatter.ISO_INSTANT ));
 			var result = item.asMap();
-			Table table = dynamoDB.getTable("cmtr-401608dd-Events-test");
+			Table table = dynamoDB.getTable("cmtr-401608dd-Events");
 			table.putItem(item);
 			Map<String, Object> resultMap = new HashMap<>();
 			resultMap.put("statusCode", 201);
