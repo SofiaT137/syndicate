@@ -38,7 +38,7 @@ public class ApiHandler implements RequestHandler<Request, Map<String, Object>> 
 			context.getLogger().log("Content: " + content);
 			item.withString("createdAt", ZonedDateTime.now( ZoneOffset.UTC ).format( DateTimeFormatter.ISO_INSTANT ));
 			var result = item.asMap();
-			Table table = dynamoDB.getTable("cmtr-401608dd");
+			Table table = dynamoDB.getTable("cmtr-401608dd-Events");
 			table.putItem(item);
 			Map<String, Object> resultMap = new HashMap<>();
 			resultMap.put("statusCode", 201);
