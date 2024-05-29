@@ -77,7 +77,7 @@ public class UuidGenerator implements RequestHandler<Object, Map<String, Object>
 
 	private static List<String> generateUUIDs(int count) {
 		List<String> uuids = new ArrayList<>();
-		for (int i = 0; i < count; i++) {
+		for (int i = 0; i < count-1; i++) {
 			uuids.add(UUID.randomUUID().toString());
 		}
 		return uuids;
