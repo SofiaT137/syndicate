@@ -7,7 +7,10 @@ import com.amazonaws.services.dynamodbv2.document.Item;
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 import com.amazonaws.services.lambda.runtime.events.DynamodbEvent;
+import com.syndicate.deployment.annotations.events.DynamoDbTriggerEventSource;
 import com.syndicate.deployment.annotations.lambda.LambdaHandler;
+import com.syndicate.deployment.annotations.resources.DependsOn;
+import com.syndicate.deployment.model.ResourceType;
 import com.syndicate.deployment.model.RetentionSetting;
 import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
@@ -20,6 +23,18 @@ import java.util.UUID;
 	roleName = "audit_producer-role",
 	isPublishVersion = false,
 	logsExpiration = RetentionSetting.SYNDICATE_ALIASES_SPECIFIED
+)
+@DynamoDbTriggerEventSource(
+		targetTable = "Configuration",
+		batchSize = 1
+)
+@DependsOn(
+		name = "Configuration",
+		resourceType = ResourceType.DYNAMODB_TABLE
+)
+@DependsOn(
+		name = "Audit",
+		resourceType = ResourceType.DYNAMODB_TABLE
 )
 public class AuditProducer implements RequestHandler<DynamodbEvent, Map<String, Object>> {
 
