@@ -1,6 +1,5 @@
 package com.task07;
 
-import com.amazonaws.regions.Region;
 import com.amazonaws.regions.Regions;
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
@@ -15,7 +14,6 @@ import com.syndicate.deployment.model.ResourceType;
 import com.syndicate.deployment.model.RetentionSetting;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -23,13 +21,11 @@ import java.nio.charset.StandardCharsets;
 import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
-
 
 @LambdaHandler(lambdaName = "uuid_generator",
 		roleName = "uuid_generator-role",
@@ -80,9 +76,11 @@ public class UuidGenerator implements RequestHandler<Object, Map<String, Object>
 	}
 
 	private static List<String> generateUUIDs(int count) {
-		return IntStream.range(0, count)
-				.mapToObj((i) -> UUID.randomUUID().toString())
-				.collect(Collectors.toList());
+		List<String> uuids = new ArrayList<>();
+		for (int i = 0; i < count; i++) {
+			uuids.add(UUID.randomUUID().toString());
+		}
+		return uuids;
 	}
 
 	private AmazonS3 getAmazonS3Client() {
