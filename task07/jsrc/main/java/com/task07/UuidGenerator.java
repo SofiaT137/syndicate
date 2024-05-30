@@ -49,27 +49,25 @@ public class UuidGenerator implements RequestHandler<Object, Map<String, Object>
 
 	public Map<String, Object> handleRequest(Object request, Context context) {
 		var uuids = generateUUIDs(10);
-        JSONObject jsonObject = new JSONObject();
-		JSONArray jsonArray = new JSONArray();
+        var jsonObject = new JSONObject();
+		var jsonArray = new JSONArray();
 		jsonArray.addAll(uuids);
 		jsonObject.put("ids", jsonArray);
 
-		String jsonLength = jsonObject.toString();
+		var jsonLength = jsonObject.toString();
 		var amazonS3Client = getAmazonS3Client();
-		String date = ZonedDateTime.now( ZoneOffset.UTC ).format( DateTimeFormatter.ISO_INSTANT );
+		var date = ZonedDateTime.now( ZoneOffset.UTC ).format( DateTimeFormatter.ISO_INSTANT );
 
 		try(InputStream inputStream = new ByteArrayInputStream(jsonLength.getBytes(StandardCharsets.UTF_8))) {
-			ObjectMetadata metadata = new ObjectMetadata();
-			metadata.setContentLength(jsonLength.length()
-			);
-
-			PutObjectRequest putRequest = new PutObjectRequest(BUCKET_NAME, date, inputStream, metadata);
+			var metadata = new ObjectMetadata();
+			metadata.setContentLength(jsonLength.length());
+			var putRequest = new PutObjectRequest(BUCKET_NAME, date, inputStream, metadata);
 			amazonS3Client.putObject(putRequest);
 		} catch (IOException e) {
 			System.out.println(e);
 		}
 
-		Map<String, Object> resultMap = new HashMap<String, Object>();
+		Map<String, Object> resultMap = new HashMap<>();
 		resultMap.put("statusCode", 200);
 		resultMap.put("date", date);
 		return resultMap;
