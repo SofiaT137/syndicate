@@ -61,7 +61,8 @@ public class UuidGenerator implements RequestHandler<Object, Map<String, Object>
 
 		try(InputStream inputStream = new ByteArrayInputStream(jsonLength.getBytes(StandardCharsets.UTF_8))) {
 			ObjectMetadata metadata = new ObjectMetadata();
-			metadata.setContentLength(jsonLength.length()-1);
+			metadata.setContentLength(jsonLength.length()
+			);
 
 			PutObjectRequest putRequest = new PutObjectRequest(BUCKET_NAME, date, inputStream, metadata);
 			amazonS3Client.putObject(putRequest);
