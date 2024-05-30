@@ -49,8 +49,12 @@ public class UuidGenerator implements RequestHandler<Object, Map<String, Object>
 
 	public Map<String, Object> handleRequest(Object request, Context context) {
 		var uuids = generateUUIDs(10);
-
-		JSONObject jsonObject = new JSONObject();
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        JSONObject jsonObject = new JSONObject();
 		JSONArray jsonArray = new JSONArray();
 		jsonArray.addAll(uuids);
 		jsonObject.put("ids", jsonArray);
