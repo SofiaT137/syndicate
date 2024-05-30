@@ -14,11 +14,11 @@
     "subnet_ids" : [ ],
     "security_group_ids" : [ ],
     "dependencies" : [ {
-      "resource_name" : "uuid-storage",
-      "resource_type" : "s3_bucket"
-    }, {
       "resource_name" : "uuid_trigger",
       "resource_type" : "cloudwatch_rule"
+    }, {
+      "resource_name" : "uuid-storage",
+      "resource_type" : "s3_bucket"
     } ],
     "event_sources" : [ {
       "resource_type" : "cloudwatch_rule_trigger",

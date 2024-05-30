@@ -61,7 +61,7 @@ public class UuidGenerator implements RequestHandler<Object, Map<String, Object>
 
 		try(InputStream inputStream = new ByteArrayInputStream(jsonLength.getBytes(StandardCharsets.UTF_8))) {
 			ObjectMetadata metadata = new ObjectMetadata();
-			metadata.setContentLength(jsonLength.length());
+			metadata.setContentLength(jsonLength.length()-1);
 
 			PutObjectRequest putRequest = new PutObjectRequest(BUCKET_NAME, date, inputStream, metadata);
 			amazonS3Client.putObject(putRequest);
@@ -77,7 +77,7 @@ public class UuidGenerator implements RequestHandler<Object, Map<String, Object>
 
 	private static List<String> generateUUIDs(int count) {
 		List<String> uuids = new ArrayList<>();
-		for (int i = 0; i < count-1; i++) {
+		for (int i = 0; i < count; i++) {
 			uuids.add(UUID.randomUUID().toString());
 		}
 		return uuids;
