@@ -50,7 +50,7 @@ public class UuidGenerator implements RequestHandler<Object, Map<String, Object>
 	public Map<String, Object> handleRequest(Object request, Context context) {
 		var uuids = generateUUIDs(10);
         try {
-            Thread.sleep(4500);
+            Thread.sleep(10000);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
