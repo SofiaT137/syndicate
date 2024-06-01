@@ -3,3 +3,4 @@ logs/
 .syndicate-config-*/
 open_meteo_api/*
 target/*
+sdk-layer-assembly.zip
