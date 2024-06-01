@@ -8,21 +8,14 @@
       <change beforePath="$PROJECT_DIR$/../task01/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../task01/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../task01/jsrc/main/java/com/task01/HelloWorld.java" beforeDir="false" afterPath="$PROJECT_DIR$/../task01/jsrc/main/java/com/task01/HelloWorld.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../task03/deployment_resources.json" beforeDir="false" afterPath="$PROJECT_DIR$/../task03/deployment_resources.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../task04/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../task04/.idea/compiler.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../task04/.idea/encodings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../task04/.idea/jarRepositories.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../task04/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../task04/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../task04/deployment_resources.json" beforeDir="false" afterPath="$PROJECT_DIR$/../task04/deployment_resources.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../task04/jsrc/main/java/com/task04/SnsHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/../task04/jsrc/main/java/com/task04/SnsHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../task04/jsrc/main/java/com/task04/SqsHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/../task04/jsrc/main/java/com/task04/SqsHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../task04/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../task04/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../task04/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../task04/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../task04/target/classes/com/task04/SnsHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/../task04/target/classes/com/task04/SnsHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../task04/target/classes/com/task04/SqsHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/../task04/target/classes/com/task04/SqsHandler.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../task04/target/deployment_resources.json" beforeDir="false" afterPath="$PROJECT_DIR$/../task04/target/deployment_resources.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../task04/target/original-task04-1.0.0.jar" beforeDir="false" afterPath="$PROJECT_DIR$/../task04/target/original-task04-1.0.0.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../task04/target/task04-1.0.0.jar" beforeDir="false" afterPath="$PROJECT_DIR$/../task04/target/task04-1.0.0.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/task05/ApiHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/task05/ApiHandler.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/original-task05-1.0.0.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/original-task05-1.0.0.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/task05-1.0.0.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/task05-1.0.0.jar" afterDir="false" />
     </list>
@@ -72,7 +65,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1716670732885</updated>
-      <workItem from="1716670733914" duration="7074000" />
+      <workItem from="1716670733914" duration="8240000" />
     </task>
     <servers />
   </component>
