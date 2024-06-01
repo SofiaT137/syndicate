@@ -37,6 +37,7 @@ import java.util.UUID;
 		resourceType = ResourceType.DYNAMODB_TABLE
 )
 public class AuditProducer implements RequestHandler<DynamodbEvent, Map<String, Object>> {
+	private static final DynamoDB DYNAMO_DB = DynamoDBClient.getInstance();
 
 	private static final String DYNAMODB_TABLE_NAME = "cmtr-401608dd-Audit-test";
 
@@ -46,8 +47,7 @@ public class AuditProducer implements RequestHandler<DynamodbEvent, Map<String, 
 
 			var item = getItem(record);
 
-			var dynamoDB = createDynamoDB();
-			var table = dynamoDB.getTable(DYNAMODB_TABLE_NAME);
+			var table = DYNAMO_DB.getTable(DYNAMODB_TABLE_NAME);
 			table.putItem(item);
 
 			resultMap.put("statusCode", 200);
@@ -55,11 +55,6 @@ public class AuditProducer implements RequestHandler<DynamodbEvent, Map<String, 
 		}
 
 		return resultMap;
-	}
-
-	private DynamoDB createDynamoDB() {
-		AmazonDynamoDB client = AmazonDynamoDBClientBuilder.defaultClient();
-		return new DynamoDB(client);
 	}
 
 	private Item getItem(DynamodbEvent.DynamodbStreamRecord record) {
