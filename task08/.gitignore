@@ -4,3 +4,5 @@ logs/
 open_meteo_api/*
 target/*
 sdk-layer-assembly.zip
+CHANGELOG.md
+task08.iml
