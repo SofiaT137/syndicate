@@ -1,4 +1,4 @@
 .syndicate
 logs/
 .syndicate-config-*/
-*.zip
+open_meteo_api
