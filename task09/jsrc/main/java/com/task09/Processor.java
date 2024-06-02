@@ -16,7 +16,6 @@ import com.syndicate.deployment.model.RetentionSetting;
 import com.syndicate.deployment.model.TracingMode;
 import com.syndicate.deployment.model.lambda.url.AuthType;
 import com.syndicate.deployment.model.lambda.url.InvokeMode;
-import com.task09.WeatherService;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -32,7 +31,7 @@ import java.util.UUID;
 )
 @LambdaLayer(
 		layerName = "sdk-layer",
-		libraries = {"lib/open_meteo_api-0.0.1.jar"},
+		libraries = {"lib/original-task09-1.0.0.jar"},
 		runtime = DeploymentRuntime.JAVA11,
 		architectures = {Architecture.ARM64},
 		artifactExtension = ArtifactExtension.ZIP
@@ -67,8 +66,9 @@ public class Processor implements RequestHandler<Object, Map<String, Object>> {
 
 	private String getWeather() {
 		WeatherService weatherService = new WeatherService();
+		System.out.println(weatherService.getClass());
         try {
-            var forecast = weatherService.getWeatherForecast();
+            String forecast = weatherService.getWeatherForecast();
 			return forecast.replaceAll("\\\"", "\"");
         } catch (IOException | InterruptedException e) {
             throw new RuntimeException(e);

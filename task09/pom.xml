@@ -42,9 +42,9 @@
             <version>2.12.7.1</version>
         </dependency>
         <dependency>
-            <groupId>demo.custom.sdk</groupId>
-            <artifactId>commons-lang3-downloaded-library</artifactId>
-            <version>3.14.0</version>
+            <groupId>task09-group</groupId>
+            <artifactId>task09</artifactId>
+            <version>1.0.0</version>
             <scope>system</scope>
             <systemPath>${basedir}/lib/open_meteo_api-0.0.1.jar</systemPath>
         </dependency>
