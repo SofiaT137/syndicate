@@ -32,9 +32,9 @@
             <version>${syndicate.java.plugin.version}</version>
         </dependency>
         <dependency>
-            <groupId>demo.custom.sdk</groupId>
-            <artifactId>commons-lang3-downloaded-library</artifactId>
-            <version>3.14.0</version>
+            <groupId>com.task08</groupId>
+            <artifactId>open_meteo_api</artifactId>
+            <version>0.0.1</version>
             <scope>system</scope>
             <systemPath>${basedir}/lib/open_meteo_api-0.0.1.jar</systemPath>
         </dependency>
