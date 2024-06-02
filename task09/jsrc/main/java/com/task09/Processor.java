@@ -16,7 +16,6 @@ import com.syndicate.deployment.model.RetentionSetting;
 import com.syndicate.deployment.model.TracingMode;
 import com.syndicate.deployment.model.lambda.url.AuthType;
 import com.syndicate.deployment.model.lambda.url.InvokeMode;
-import com.task08.WeatherService;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
