@@ -24,6 +24,7 @@ import java.util.UUID;
 @LambdaHandler(lambdaName = "processor",
 	roleName = "processor-role",
 	isPublishVersion = false,
+	layers = {"sdk-layer"},
 	runtime = DeploymentRuntime.JAVA11,
 	architecture = Architecture.ARM64,
 	tracingMode = TracingMode.Active,
