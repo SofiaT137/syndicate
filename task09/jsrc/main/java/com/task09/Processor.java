@@ -66,10 +66,9 @@ public class Processor implements RequestHandler<Object, Map<String, Object>> {
 	}
 
 	private String getWeather() {
-		WeatherService weatherService = new WeatherService();
-		System.out.println(weatherService.getClass());
+		var weatherService = new WeatherService();
         try {
-            String forecast = weatherService.getWeatherForecast();
+            var forecast = weatherService.getWeatherForecast();
 			return forecast.replaceAll("\\\"", "\"");
         } catch (IOException | InterruptedException e) {
             throw new RuntimeException(e);
@@ -77,7 +76,7 @@ public class Processor implements RequestHandler<Object, Map<String, Object>> {
     }
 
 	private Item getItem() {
-		Item item = new Item();
+		var item = new Item();
 		item.withString("id", getRandomUUID().toString());
 		var weather = getWeather();
 		item.withJSON("forecast", weather);

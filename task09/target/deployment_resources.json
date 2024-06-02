@@ -34,7 +34,7 @@
     "runtimes" : [ "java11" ],
     "resource_type" : "lambda_layer",
     "deployment_package" : "sdk-layer-assembly.zip",
-    "libraries" : [ "lib/original-task09-1.0.0.jar" ],
+    "libraries" : [ "lib/open_meteo_api-0.0.1.jar" ],
     "architectures" : [ "arm64" ]
   }
 }
