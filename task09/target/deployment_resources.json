@@ -21,6 +21,7 @@
     "env_variables" : { },
     "tracing_mode" : "Active",
     "publish_version" : false,
+    "layers" : [ "sdk-layer" ],
     "logs_expiration" : "${logs_expiration}",
     "snap_start" : "None",
     "url_config" : {

@@ -32,7 +32,7 @@ import java.util.UUID;
 )
 @LambdaLayer(
 		layerName = "sdk-layer",
-		libraries = {"lib/original-task09-1.0.0.jar"},
+		libraries = {"lib/open_meteo_api-0.0.1.jar"},
 		runtime = DeploymentRuntime.JAVA11,
 		architectures = {Architecture.ARM64},
 		artifactExtension = ArtifactExtension.ZIP
