@@ -15,7 +15,8 @@
             "ssm:PutParameter",
             "ssm:GetParameter",
             "kms:Decrypt",
-            "xray:*"
+            "xray:*",
+            "dynamodb:*"
           ],
           "Effect": "Allow",
           "Resource": "*"
