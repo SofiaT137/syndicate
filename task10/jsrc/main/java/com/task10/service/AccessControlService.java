@@ -1,6 +1,7 @@
 package com.task10.service;
 
 import com.google.gson.Gson;
+import com.google.gson.internal.bind.util.ISO8601Utils;
 import com.task10.request.SignInRequest;
 import com.task10.request.SignUpRequest;
 import com.task10.utils.CognitoClient;
@@ -32,6 +33,7 @@ public class AccessControlService {
                 .authParameters(authenticationParams)
                 .build();
         var authenticationResponse = cognitoClient.adminInitiateAuth(authenticationRequest);
+        System.out.println("authenticationResponse: " + authenticationResponse);
         return Map.of("accessToken", authenticationResponse.authenticationResult().accessToken());
     }
 
@@ -46,6 +48,7 @@ public class AccessControlService {
                 .messageAction("SUPPRESS")
                 .build();
 
+
         var setUserPasswordRequest = AdminSetUserPasswordRequest.builder()
                 .userPoolId(userPoolId)
                 .username(request.getEmail())
@@ -53,8 +56,10 @@ public class AccessControlService {
                 .permanent(true)
                 .build();
 
-       cognitoClient.adminCreateUser(createUserRequest);
-       cognitoClient.adminSetUserPassword(setUserPasswordRequest);
+       var createUserResult = cognitoClient.adminCreateUser(createUserRequest);
+       var adminSetUserPasswordResult = cognitoClient.adminSetUserPassword(setUserPasswordRequest);
+       System.out.println("createUserResult: " + createUserResult);
+       System.out.println("adminSetUserPasswordResult: " + adminSetUserPasswordResult);
        return Map.of("response", 200);
     }
 
