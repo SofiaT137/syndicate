@@ -16,7 +16,9 @@ public class TablesRepository implements Repository<TableDTO> {
 
     public TablesRepository() {
         var dynamoDBClient = DynamoDBClient.getInstance();
-        this.dynamoDBTable = dynamoDBClient.getTable(TABLE_NAME);
+        var table = dynamoDBClient.getTable(TABLE_NAME);
+        System.out.println("I found the table " + table.getTableName());
+        dynamoDBTable = table;
     }
 
     public Map<String, Object> get(int itemId) {
