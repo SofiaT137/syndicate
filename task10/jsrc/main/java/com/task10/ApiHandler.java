@@ -21,9 +21,9 @@ import java.util.Map;
 	logsExpiration = RetentionSetting.SYNDICATE_ALIASES_SPECIFIED
 )
 public class ApiHandler implements RequestHandler<APIGatewayProxyRequestEvent, APIGatewayProxyResponseEvent> {
-	private static final String POOL_NAME = "simple-booking-userpool-test";
-	private static final String TABLES_DB_NAME = "Tables-test";
-	private static final String RESERVATION_DB_NAME = "Reservations-test";
+	private static final String POOL_NAME = "simple-booking-userpool";
+	private static final String TABLES_DB_NAME = "Tables";
+	private static final String RESERVATION_DB_NAME = "Reservations";
 
     private final TablesService tablesService;
 	private final ReservationService reservationService;
@@ -40,8 +40,8 @@ public class ApiHandler implements RequestHandler<APIGatewayProxyRequestEvent, A
 	@Override
 	public APIGatewayProxyResponseEvent handleRequest(APIGatewayProxyRequestEvent request, Context context) {
 		Map<String, Object> resultMap = new HashMap<>();
-		System.out.println("Request: " + request.toString());
-		System.out.println("Context: " + context);
+		System.out.println("Request: " + request.toString() + " " + "request body: " + request.getBody());
+		System.out.println("Context: " + context.getFunctionName());
 		try {
 			String poolName = context.getFunctionName().replace("api_handler", "simple-booking-userpool");
 			var pathParameters = request.getPathParameters();
