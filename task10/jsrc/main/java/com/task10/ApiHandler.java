@@ -40,14 +40,16 @@ public class ApiHandler implements RequestHandler<APIGatewayProxyRequestEvent, A
 	@Override
 	public APIGatewayProxyResponseEvent handleRequest(APIGatewayProxyRequestEvent request, Context context) {
 		Map<String, Object> resultMap = new HashMap<>();
-		System.out.println("BodyRequest: " + request.getBody());
+		System.out.println("Request: " + request);
 		System.out.println("Context: " + context);
 		try {
+			String poolName = context.getFunctionName().replace("api_handler", "simple-booking-userpool");
+			var pathParameters = request.getPathParameters();
 			var path = request.getPath();
-			var body = request.getBody();
-			var parameters = request.getPathParameters();
 			var httpMethod = request.getHttpMethod();
-			resultMap = handlePath(path, body, "", parameters, httpMethod);
+			var body = request.getBody();
+
+			resultMap = handlePath(path, body, poolName, pathParameters, httpMethod);
 
 			return new APIGatewayProxyResponseEvent()
 					.withStatusCode(200)
