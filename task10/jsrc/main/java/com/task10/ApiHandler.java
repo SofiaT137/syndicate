@@ -60,13 +60,6 @@ public class ApiHandler implements RequestHandler<APIGatewayProxyRequestEvent, A
 			var path = request.getPath();
 			var httpMethod = request.getHttpMethod();
 			var body = request.getBody();
-			var id = pathParameters.get("id");
-
-			if (path.startsWith("/tables")
-				&& pathParameters != null
-				&& id != null) {
-			resultMap = tableService.get(Integer.parseInt(id));
-			}
 
 			resultMap = handlePath(path, body, poolName, pathParameters, httpMethod, tableService, reservationService);
 
@@ -86,18 +79,20 @@ public class ApiHandler implements RequestHandler<APIGatewayProxyRequestEvent, A
 	private Map<String, Object> handlePath(String path, String body, String poolName, Map<String, String> parameters,
 										   String method, TablesService tablesService,
 										   ReservationService reservationService) {
-		switch (path) {
-			case "/signup":
-				return signUp(body, poolName);
-			case "/signin":
-				return signIn(body, poolName);
-			case "/tables":
-				return handleTableRequests(method, body, tablesService);
-			case "/reservations":
-				return handleReservationRequests(method, body, reservationService);
-			default:
-				throw new IllegalStateException("Unexpected value: " + path);
+		var id = parameters.get("id");
+
+		if (path.equals("/signup")) {
+			return signUp(body, poolName);
+		} else if (path.equals("/signin")) {
+			return signIn(body, poolName);
+		} else if (path.startsWith("/tables") && parameters != null && id != null ) {
+			return tablesService.get(Integer.parseInt(id));
+		} else if (path.equals("/tables")) {
+			return handleTableRequests(method, body, tablesService);
+		} else if (path.equals("/reservations")){
+			return handleReservationRequests(method, body, reservationService);
 		}
+		throw new IllegalStateException("Unexpected value: " + path);
 	}
 
 	private Map<String, Object> signIn(String body, String poolName) {
