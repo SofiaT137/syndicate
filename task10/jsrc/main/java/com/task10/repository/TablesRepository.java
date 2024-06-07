@@ -2,14 +2,13 @@ package com.task10.repository;
 
 import com.amazonaws.services.dynamodbv2.document.Table;
 import com.amazonaws.services.dynamodbv2.document.Item;
-import com.google.gson.Gson;
 import com.task10.dto.TableDTO;
 import com.task10.utils.DynamoDBClient;
 import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
-public class TablesRepository implements Repository {
+public class TablesRepository implements Repository<TableDTO> {
 
     private static final String TABLE_NAME = "Tables";
 
@@ -20,7 +19,7 @@ public class TablesRepository implements Repository {
         this.dynamoDBTable = dynamoDBClient.getTable(TABLE_NAME);
     }
 
-    public Map<String, Object> get(Long itemId) {
+    public Map<String, Object> get(int itemId) {
        return dynamoDBTable.getItem("id", itemId).asMap();
     }
 
@@ -35,8 +34,7 @@ public class TablesRepository implements Repository {
     }
 
     @Override
-    public Map<String, Object> create(String body) {
-        var table = new Gson().fromJson(body, TableDTO.class);
+    public Map<String, Object> create(TableDTO table) {
         var item = new Item();
         item.withInt("id", table.getId());
         item.withInt("number", table.getNumber());

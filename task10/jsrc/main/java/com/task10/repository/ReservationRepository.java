@@ -12,7 +12,7 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
-public class ReservationRepository implements Repository {
+public class ReservationRepository implements Repository<ReservationDTO> {
 
     private static final String TABLE_NAME = "Reservations";
     private static final String RESERVATIONS = "reservations";
@@ -36,8 +36,7 @@ public class ReservationRepository implements Repository {
     }
 
     @Override
-    public Map<String, Object> create(String body) {
-        var reservation = new Gson().fromJson(body, ReservationDTO.class);
+    public Map<String, Object> create(ReservationDTO reservation) {
         var id = getUUID();
         ensureNoTimeConflict(reservation);
         var item = new Item();
