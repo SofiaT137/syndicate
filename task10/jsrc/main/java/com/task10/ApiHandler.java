@@ -12,6 +12,8 @@ import com.task10.repository.TablesRepository;
 import com.task10.service.AccessControlService;
 import com.task10.service.ReservationService;
 import com.task10.service.TablesService;
+import com.task10.utils.NameHolder;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -21,16 +23,15 @@ import java.util.Map;
 	logsExpiration = RetentionSetting.SYNDICATE_ALIASES_SPECIFIED
 )
 public class ApiHandler implements RequestHandler<APIGatewayProxyRequestEvent, APIGatewayProxyResponseEvent> {
-	private static final String POOL_NAME = "simple-booking-userpool";
-	private static final String TABLES_DB_NAME = "Tables";
-	private static final String RESERVATION_DB_NAME = "Reservations";
 
     private final TablesService tablesService;
 	private final ReservationService reservationService;
 	private final AccessControlService accessControlService;
+	private final NameHolder nameHolder;
 
 	public ApiHandler() {
 		accessControlService = new AccessControlService();
+		nameHolder = NameHolder.getInstance();
         var tablesRepository = new TablesRepository();
         var reservationRepository = new ReservationRepository();
 		this.tablesService = new TablesService(tablesRepository);
@@ -43,7 +44,16 @@ public class ApiHandler implements RequestHandler<APIGatewayProxyRequestEvent, A
 		System.out.println("Request: " + request.toString() + " " + "request body: " + request.getBody());
 		System.out.println("Context: " + context.getFunctionName());
 		try {
+
 			String poolName = context.getFunctionName().replace("api_handler", "simple-booking-userpool");
+			System.out.println("Poolname: " + poolName);
+			String tablesName = context.getFunctionName().replace("api_handler", "Tables");
+			nameHolder.setTablesName(tablesName);
+			System.out.println("tablesName: " + tablesName);
+			String reservationName = context.getFunctionName().replace("api_handler", "Reservations");
+			nameHolder.setReservationsName(reservationName);
+			System.out.println("reservationName: " + reservationName);
+
 			var pathParameters = request.getPathParameters();
 			var path = request.getPath();
 			var httpMethod = request.getHttpMethod();
