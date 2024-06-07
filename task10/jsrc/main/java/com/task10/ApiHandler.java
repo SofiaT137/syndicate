@@ -79,12 +79,12 @@ public class ApiHandler implements RequestHandler<APIGatewayProxyRequestEvent, A
 	private Map<String, Object> handlePath(String path, String body, String poolName, Map<String, String> parameters,
 										   String method, TablesService tablesService,
 										   ReservationService reservationService) {
-		var id = parameters.get("id");
-		if (path.startsWith("/tables")
-				&& parameters != null
-				&& id != null) {
-			return tablesService.get(Integer.parseInt(id));
-		}
+//		var id = parameters.get("id");
+//		if (path.startsWith("/tables")
+//				&& parameters != null
+//				&& id != null) {
+//			return tablesService.get(Integer.parseInt(id));
+//		}
 
 		switch (path) {
 			case "/signup":
