@@ -62,15 +62,19 @@ public class ApiHandler implements RequestHandler<APIGatewayProxyRequestEvent, A
 		}
 	}
 
-	private Map<String, Object> handlePath(String path, String body, String poolName, Map<String, String> parameters,
-										   String method) {
-		return switch (path) {
-			case "/signup" -> signUp(body, poolName);
-			case "/signin" -> signIn(body, poolName);
-			case "/tables" -> handleTableRequests(method, body, parameters);
-			case "/reservations" -> handleReservationRequests(method, body);
-			default -> throw new IllegalStateException("Unexpected value: " + path);
-		};
+	private Map<String, Object> handlePath(String path, String body, String poolName, Map<String, String> parameters, String method) {
+		switch (path) {
+			case "/signup":
+				return signUp(body, poolName);
+			case "/signin":
+				return signIn(body, poolName);
+			case "/tables":
+				return handleTableRequests(method, body, parameters);
+			case "/reservations":
+				return handleReservationRequests(method, body);
+			default:
+				throw new IllegalStateException("Unexpected value: " + path);
+		}
 	}
 
 	private Map<String, Object> signIn(String body, String poolName) {
@@ -82,27 +86,29 @@ public class ApiHandler implements RequestHandler<APIGatewayProxyRequestEvent, A
 	}
 
 	private Map<String, Object> handleTableRequests(String httpMethod, String body, Map<String, String> pathParameters) {
-		return switch (httpMethod) {
-			case "GET" -> {
+		switch (httpMethod) {
+			case "GET":
 				if (pathParameters != null && pathParameters.containsKey("id")) {
 					int tableId = Integer.parseInt(pathParameters.get("id"));
-					yield tablesService.get(tableId);
+					return tablesService.get(tableId);
 				} else {
-					yield tablesService.getAll();
+					return tablesService.getAll();
 				}
-			}
-			case "POST" -> tablesService.create(body);
-			default -> throw new UnsupportedOperationException("HTTP method " + httpMethod
-					+ " is not supported for tables");
-		};
+			case "POST":
+				return tablesService.create(body);
+			default:
+				throw new UnsupportedOperationException("HTTP method " + httpMethod + " is not supported for tables");
+		}
 	}
 
 	private Map<String, Object> handleReservationRequests(String httpMethod, String body) {
-		return switch (httpMethod) {
-			case "GET" -> reservationService.getAll();
-			case "POST" -> reservationService.create(body);
-			default -> throw new UnsupportedOperationException("HTTP method " + httpMethod
-					+ " is not supported for reservations");
-		};
+		switch (httpMethod) {
+			case "GET":
+				return reservationService.getAll();
+			case "POST":
+				return reservationService.create(body);
+			default:
+				throw new UnsupportedOperationException("HTTP method " + httpMethod + " is not supported for reservations");
+		}
 	}
 }
