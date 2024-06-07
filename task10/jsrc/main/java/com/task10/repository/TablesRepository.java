@@ -2,9 +2,9 @@ package com.task10.repository;
 
 import com.amazonaws.services.dynamodbv2.document.Table;
 import com.amazonaws.services.dynamodbv2.document.Item;
+import com.amazonaws.services.dynamodbv2.xspec.S;
 import com.task10.dto.TableDTO;
 import com.task10.utils.DynamoDBClient;
-import com.task10.utils.NameHolder;
 
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -12,14 +12,11 @@ import java.util.stream.StreamSupport;
 
 public class TablesRepository implements Repository<TableDTO> {
 
-    private final NameHolder nameHolder;
-
     private final Table dynamoDBTable;
 
-    public TablesRepository() {
-        nameHolder = NameHolder.getInstance();
+    public TablesRepository(String tablesName) {
         var dynamoDBClient = DynamoDBClient.getInstance();
-        var table = dynamoDBClient.getTable(nameHolder.getTablesName());
+        var table = dynamoDBClient.getTable(tablesName);
         System.out.println("I found the table " + table.getTableName());
         dynamoDBTable = table;
     }
@@ -40,7 +37,6 @@ public class TablesRepository implements Repository<TableDTO> {
 
     @Override
     public Map<String, Object> create(TableDTO table) {
-        System.out.println("The table name is " + nameHolder.getTablesName() + "!!!!!");
         var item = new Item();
         item.withInt("id", table.getId());
         item.withInt("number", table.getNumber());

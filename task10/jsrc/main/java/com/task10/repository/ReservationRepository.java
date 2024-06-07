@@ -8,21 +8,21 @@ import com.task10.utils.DynamoDBClient;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.Objects;
 import java.util.UUID;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 public class ReservationRepository implements Repository<ReservationDTO> {
 
-    private static final String TABLE_NAME = "Reservations";
     private static final String RESERVATIONS = "reservations";
     private static final String ERROR_MESSAGE = "The time is occupied";
 
     private final Table dynamoDBTable;
 
-    public ReservationRepository() {
+    public ReservationRepository(String reservationsName) {
         var dynamoDBClient = DynamoDBClient.getInstance();
-        this.dynamoDBTable = dynamoDBClient.getTable(TABLE_NAME);
+        this.dynamoDBTable = dynamoDBClient.getTable(reservationsName);
     }
 
     @Override

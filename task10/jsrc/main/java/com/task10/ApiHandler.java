@@ -12,10 +12,10 @@ import com.task10.repository.TablesRepository;
 import com.task10.service.AccessControlService;
 import com.task10.service.ReservationService;
 import com.task10.service.TablesService;
-import com.task10.utils.NameHolder;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 @LambdaHandler(lambdaName = "api_handler",
 	roleName = "api_handler-role",
@@ -24,18 +24,10 @@ import java.util.Map;
 )
 public class ApiHandler implements RequestHandler<APIGatewayProxyRequestEvent, APIGatewayProxyResponseEvent> {
 
-    private final TablesService tablesService;
-	private final ReservationService reservationService;
 	private final AccessControlService accessControlService;
-	private final NameHolder nameHolder;
 
 	public ApiHandler() {
 		accessControlService = new AccessControlService();
-		nameHolder = NameHolder.getInstance();
-        var tablesRepository = new TablesRepository();
-        var reservationRepository = new ReservationRepository();
-		this.tablesService = new TablesService(tablesRepository);
-		this.reservationService = new ReservationService(reservationRepository, tablesRepository);
 	}
 
 	@Override
@@ -47,19 +39,29 @@ public class ApiHandler implements RequestHandler<APIGatewayProxyRequestEvent, A
 
 			String poolName = context.getFunctionName().replace("api_handler", "simple-booking-userpool");
 			System.out.println("Poolname: " + poolName);
+
 			String tablesName = context.getFunctionName().replace("api_handler", "Tables");
-			nameHolder.setTablesName(tablesName);
 			System.out.println("tablesName: " + tablesName);
+			if (Objects.isNull(tablesName) || tablesName.isBlank()) {
+				tablesName = "Tables";
+			}
+			var tablesRepository = new TablesRepository(tablesName);
+			var tableService = new TablesService(tablesRepository);
+
 			String reservationName = context.getFunctionName().replace("api_handler", "Reservations");
-			nameHolder.setReservationsName(reservationName);
 			System.out.println("reservationName: " + reservationName);
+			if (Objects.isNull(reservationName) || reservationName.isBlank()) {
+				reservationName = "Reservations";
+			}
+			var reservationRepository = new ReservationRepository(reservationName);
+			var reservationService = new ReservationService(reservationRepository, tablesRepository);
 
 			var pathParameters = request.getPathParameters();
 			var path = request.getPath();
 			var httpMethod = request.getHttpMethod();
 			var body = request.getBody();
 
-			resultMap = handlePath(path, body, poolName, pathParameters, httpMethod);
+			resultMap = handlePath(path, body, poolName, pathParameters, httpMethod, tableService, reservationService);
 
 			return new APIGatewayProxyResponseEvent()
 					.withStatusCode(200)
@@ -74,16 +76,18 @@ public class ApiHandler implements RequestHandler<APIGatewayProxyRequestEvent, A
 		}
 	}
 
-	private Map<String, Object> handlePath(String path, String body, String poolName, Map<String, String> parameters, String method) {
+	private Map<String, Object> handlePath(String path, String body, String poolName, Map<String, String> parameters,
+										   String method, TablesService tablesService,
+										   ReservationService reservationService) {
 		switch (path) {
 			case "/signup":
 				return signUp(body, poolName);
 			case "/signin":
 				return signIn(body, poolName);
 			case "/tables":
-				return handleTableRequests(method, body, parameters);
+				return handleTableRequests(method, body, parameters, tablesService);
 			case "/reservations":
-				return handleReservationRequests(method, body);
+				return handleReservationRequests(method, body, reservationService);
 			default:
 				throw new IllegalStateException("Unexpected value: " + path);
 		}
@@ -97,7 +101,9 @@ public class ApiHandler implements RequestHandler<APIGatewayProxyRequestEvent, A
 		return accessControlService.signUp(body, poolName);
 	}
 
-	private Map<String, Object> handleTableRequests(String httpMethod, String body, Map<String, String> pathParameters) {
+	private Map<String, Object> handleTableRequests(String httpMethod, String body,
+													Map<String, String> pathParameters,
+													TablesService tablesService) {
 		switch (httpMethod) {
 			case "GET":
 				if (pathParameters != null && pathParameters.containsKey("id")) {
@@ -113,7 +119,8 @@ public class ApiHandler implements RequestHandler<APIGatewayProxyRequestEvent, A
 		}
 	}
 
-	private Map<String, Object> handleReservationRequests(String httpMethod, String body) {
+	private Map<String, Object> handleReservationRequests(String httpMethod, String body,
+														  ReservationService reservationService) {
 		switch (httpMethod) {
 			case "GET":
 				return reservationService.getAll();
