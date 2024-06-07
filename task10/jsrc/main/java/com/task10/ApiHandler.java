@@ -60,6 +60,13 @@ public class ApiHandler implements RequestHandler<APIGatewayProxyRequestEvent, A
 			var path = request.getPath();
 			var httpMethod = request.getHttpMethod();
 			var body = request.getBody();
+			var id = pathParameters.get("id");
+
+			if (path.startsWith("/tables")
+				&& pathParameters != null
+				&& id != null) {
+			resultMap = tableService.get(Integer.parseInt(id));
+			}
 
 			resultMap = handlePath(path, body, poolName, pathParameters, httpMethod, tableService, reservationService);
 
@@ -79,13 +86,6 @@ public class ApiHandler implements RequestHandler<APIGatewayProxyRequestEvent, A
 	private Map<String, Object> handlePath(String path, String body, String poolName, Map<String, String> parameters,
 										   String method, TablesService tablesService,
 										   ReservationService reservationService) {
-//		var id = parameters.get("id");
-//		if (path.startsWith("/tables")
-//				&& parameters != null
-//				&& id != null) {
-//			return tablesService.get(Integer.parseInt(id));
-//		}
-
 		switch (path) {
 			case "/signup":
 				return signUp(body, poolName);
