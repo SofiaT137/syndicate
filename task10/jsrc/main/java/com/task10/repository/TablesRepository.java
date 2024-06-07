@@ -10,7 +10,7 @@ import java.util.stream.StreamSupport;
 
 public class TablesRepository implements Repository<TableDTO> {
 
-    private static final String TABLE_NAME = "Tables";
+    private static final String TABLE_NAME = "Tables-test";
 
     private final Table dynamoDBTable;
 
@@ -41,7 +41,8 @@ public class TablesRepository implements Repository<TableDTO> {
         item.withInt("places", table.getPlaces());
         item.withBoolean("isVip", table.getVip());
         item.withInt("minOrder", table.getMinOrder());
-        dynamoDBTable.putItem(item);
+        var result = dynamoDBTable.putItem(item);
+        System.out.println("Result: " + result);
         return Map.of("id", table.getId());
     }
 }
