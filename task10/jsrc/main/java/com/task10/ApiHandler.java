@@ -21,9 +21,9 @@ import java.util.Map;
 	logsExpiration = RetentionSetting.SYNDICATE_ALIASES_SPECIFIED
 )
 public class ApiHandler implements RequestHandler<APIGatewayProxyRequestEvent, APIGatewayProxyResponseEvent> {
-	private static final String POOL_NAME = "simple-booking-userpool";
-	private static final String TABLES_DB_NAME = "Tables";
-	private static final String RESERVATION_DB_NAME = "Reservations";
+	private static final String POOL_NAME = "simple-booking-userpool-test";
+	private static final String TABLES_DB_NAME = "Tables-test";
+	private static final String RESERVATION_DB_NAME = "Reservations-test";
 
     private final TablesService tablesService;
 	private final ReservationService reservationService;
