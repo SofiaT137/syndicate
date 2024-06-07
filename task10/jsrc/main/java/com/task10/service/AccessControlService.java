@@ -34,7 +34,7 @@ public class AccessControlService {
                 .build();
         var authenticationResponse = cognitoClient.adminInitiateAuth(authenticationRequest);
         System.out.println("authenticationResponse: " + authenticationResponse);
-        return Map.of("accessToken", authenticationResponse.authenticationResult().accessToken());
+        return Map.of("accessToken", authenticationResponse.authenticationResult().idToken());
     }
 
     public Map<String, Object> signUp(String body, String poolName) {
