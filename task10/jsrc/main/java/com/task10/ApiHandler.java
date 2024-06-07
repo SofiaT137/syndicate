@@ -22,6 +22,8 @@ import java.util.Map;
 )
 public class ApiHandler implements RequestHandler<APIGatewayProxyRequestEvent, APIGatewayProxyResponseEvent> {
 	private static final String POOL_NAME = "simple-booking-userpool";
+	private static final String TABLES_DB_NAME = "Tables";
+	private static final String RESERVATION_DB_NAME = "Reservations";
 
     private final TablesService tablesService;
 	private final ReservationService reservationService;
@@ -41,12 +43,13 @@ public class ApiHandler implements RequestHandler<APIGatewayProxyRequestEvent, A
 		System.out.println("Request: " + request.toString() + " " + "request body: " + request.getBody());
 		System.out.println("Context: " + context.getFunctionName());
 		try {
+			String poolName = context.getFunctionName().replace("api_handler", "simple-booking-userpool");
 			var pathParameters = request.getPathParameters();
 			var path = request.getPath();
 			var httpMethod = request.getHttpMethod();
 			var body = request.getBody();
 
-			resultMap = handlePath(path, body, POOL_NAME, pathParameters, httpMethod);
+			resultMap = handlePath(path, body, poolName, pathParameters, httpMethod);
 
 			return new APIGatewayProxyResponseEvent()
 					.withStatusCode(200)
