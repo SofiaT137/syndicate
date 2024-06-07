@@ -7,7 +7,6 @@ com/task10/service/ReservationService.class
 com/task10/utils/DynamoDBClient.class
 com/task10/response/SignInResponse.class
 com/task10/repository/ReservationRepository.class
-com/task10/utils/NameHolder.class
 com/task10/dto/TableDTO.class
 com/task10/dto/ReservationDTO.class
 com/task10/request/SignInRequest.class

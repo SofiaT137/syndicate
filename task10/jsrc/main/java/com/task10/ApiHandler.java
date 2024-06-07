@@ -79,13 +79,20 @@ public class ApiHandler implements RequestHandler<APIGatewayProxyRequestEvent, A
 	private Map<String, Object> handlePath(String path, String body, String poolName, Map<String, String> parameters,
 										   String method, TablesService tablesService,
 										   ReservationService reservationService) {
+		var id = parameters.get("id");
+		if (path.startsWith("/tables")
+				&& parameters != null
+				&& id != null) {
+			return tablesService.get(Integer.parseInt(id));
+		}
+
 		switch (path) {
 			case "/signup":
 				return signUp(body, poolName);
 			case "/signin":
 				return signIn(body, poolName);
 			case "/tables":
-				return handleTableRequests(method, body, parameters, tablesService);
+				return handleTableRequests(method, body, tablesService);
 			case "/reservations":
 				return handleReservationRequests(method, body, reservationService);
 			default:
@@ -101,17 +108,10 @@ public class ApiHandler implements RequestHandler<APIGatewayProxyRequestEvent, A
 		return accessControlService.signUp(body, poolName);
 	}
 
-	private Map<String, Object> handleTableRequests(String httpMethod, String body,
-													Map<String, String> pathParameters,
-													TablesService tablesService) {
+	private Map<String, Object> handleTableRequests(String httpMethod, String body, TablesService tablesService) {
 		switch (httpMethod) {
 			case "GET":
-				if (pathParameters != null && pathParameters.containsKey("id")) {
-					int tableId = Integer.parseInt(pathParameters.get("id"));
-					return tablesService.get(tableId);
-				} else {
-					return tablesService.getAll();
-				}
+				return tablesService.getAll();
 			case "POST":
 				return tablesService.create(body);
 			default:

@@ -22,7 +22,9 @@ public class TablesRepository implements Repository<TableDTO> {
     }
 
     public Map<String, Object> get(int itemId) {
-       return dynamoDBTable.getItem("id", itemId).asMap();
+       var item = dynamoDBTable.getItem("id", itemId);
+       System.out.println("I found table: " + item);
+       return item.asMap();
     }
 
     @Override
