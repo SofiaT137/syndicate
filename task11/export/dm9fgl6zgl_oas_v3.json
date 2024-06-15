@@ -722,12 +722,12 @@
           },
           "email": {
             "type": "string",
-            "example": "email@email.com",
+            "example": "email@test.com",
             "description": "Valid email"
           },
           "password": {
             "type": "string",
-            "example": "8b9950B878$b",
+            "example": "1aa91$b899",
             "description": "Valid 8+ chars password"
           }
         }
